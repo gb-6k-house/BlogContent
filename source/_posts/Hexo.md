@@ -16,7 +16,7 @@ $ npm install hexo-cli -g
 ```
 $ hexo init blog
 ```
-之后会生成整个项目的目录机构，而且会安装packgejson依赖包，如果没有安装则手动安装即可
+之后会生成整个项目的目录结构，而且会安装packgejson依赖包，如果没有安装则手动安装即可
 ```
 $ npm install
 ```
@@ -35,8 +35,9 @@ $ hexo server
 > INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 
 好了，可以开始写博客了。但是我们每个人独有自己的审美观，我们当然想选择自己喜欢的主题，那么很高兴的告诉你[Hexo][1]主题泛滥了☺, 快去下载自己个性[主题](https://hexo.io/themes/)吧。
-####主题怎么弄呢
-此处分享一篇文字，参照[NexT主题设置](http://theme-next.iissnan.com/getting-started.html)
+
+#### 主题怎么弄呢
+此处分享一篇文章，参照[NexT主题设置](http://theme-next.iissnan.com/getting-started.html)
 
 ***
 至此讲道理，我们应该讲完了。但是现在讲究共享经济，好的东西要分享。你的博客当然也希望分享出去,希望别人看到。那么*Github pages*就派上用场了
@@ -74,7 +75,7 @@ $ hexo deploy
 ```
 如果未设置github 的ssh信息，那么deploy的时候需要输入github账号和密码。deploy的原理实际上就是把generate生成在public目录下的文件推送到你的github repository
 
-## 在说一句
+## 再说一句
 事情都得有头有尾，总结是有必要的。如果你是个码农[Hexo][1]对你来说so easy。对你来说发布一篇博客可能经常要干的事情就是
 ```
 $ hexo clean
