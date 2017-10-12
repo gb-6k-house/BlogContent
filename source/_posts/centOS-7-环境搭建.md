@@ -114,13 +114,89 @@ CREATE DATABASE `databasename` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 创建用户
 ```
 create user 'username'@'%' identified by ‘password’;
+--更新用户本地登录的密码
+SET PASSWORD FOR 'username'@'localhost' = PASSWORD('password');
 ```
+
 给用户在其他机器操作授权
 ```
-grant select,insert,update,delete,create on databasename.* to 'username'@'%' identified by "‘password’";--用户授权数据库*代表整个数据库
+grant select,insert,update,delete,create, create routine, alter routine, execute on databasename.* to 'username'@'%' identified by "password";--用户授权数据库*代表整个数据库
 ```
 给用户在本机操作授权
 ```
-grant select,insert,update,delete,create,alter, drop on databasename.* to 'username'@'localhost' identified by "‘password’";
+grant select,insert,update,delete,create,alter, drop, create routine, alter routine, execute on databasename.* to 'username'@'localhost' identified by "password";
 ```
+
+
+### PHP+nginx环境搭建安装
+#### PHP安装
+```
+$ yum install php
+```
+如下命令查看php是否安装成功
+```
+$ php -v
+```
+安装php扩展 
+```
+$ yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring
+```
+PHP配置文件路径在/etc/php.ini
+
+安装php-fpm，php-fpm通过fastCGI协议来与nginx进行通信
+```
+$ yum install php-fpm
+```
+php-fpm 配置文件路径在/etc/php-fpm.ini ,/etc/php-fpm.d/www.conf
+
+
+启动 php-fpm 
+```
+$ service php-fpm start
+```
+php-fpm 确实监听9000端口，可以通过如下命令查看
+```
+$ netstat -lntp
+```
+
+#### 配置nginx 
+参照如下
+```
+   server {
+       listen 443;
+       listen 80;
+       server_name *.zzrdad.cn
+       index index.php index.html index.htm;
+       #php项目根目录
+       root   /root/wwww/MetInfo; 
+       location / {
+          #     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+         try_files $uri $uri/ =404;
+      }
+
+        error_page 404 /404.html;
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+                root /usr/share/nginx/html;
+         }
+
+       location ~ \.php$ {
+        try_files $uri = 404;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+     }
+   }
+```
+#### 问题
+1、范围php资源时 nginx提示错误
+ primary script unknown phpfpm
+  解决办法
+  问题出在nginx配置，root目录可能配置错误 或者nginx配置中user参数 和 php-fpm 用户user存在范围权限问题。
+  ngixn缺省user=ngixn ，php-fpm中缺省user=apache，这两个用户必须对PHP项目资源有执行权限, 可以将两个user配置成一个
+
+
+
+
 [1]:https://hexo.io 
