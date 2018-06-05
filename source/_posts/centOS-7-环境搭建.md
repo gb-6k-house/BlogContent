@@ -120,7 +120,7 @@ SET PASSWORD FOR 'username'@'localhost' = PASSWORD('password');
 
 给用户在其他机器操作授权
 ```
-grant select,insert,update,delete,create, create routine, alter routine, execute on databasename.* to 'username'@'%' identified by "password";--用户授权数据库*代表整个数据库
+grant select,insert,update,delete,create,alter, create routine, alter routine, execute on databasename.* to 'username'@'%' identified by "password";--用户授权数据库*代表整个数据库
 ```
 给用户在本机操作授权
 ```
