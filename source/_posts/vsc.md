@@ -1,5 +1,5 @@
 ---
-title: 熟练运用Visual Studio Code
+title: 在VSCode中创建自己的代码片段
 date: 2018-06-08 10:57:43
 tags: [技术之路, IDE]
 ---
