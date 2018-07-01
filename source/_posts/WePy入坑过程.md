@@ -28,5 +28,28 @@ pages: [
       'pages/index'
     ]
 ```
+### 关于使用$redirect或$navigate等,在页面之间转递数据问题
+1、直接将数据做个$navigate等的参数进行转递，无法转递Object。
+```
+// page1.js
+  this.$navigate('./page2',{param1:{}});
+
+  // page2.js
+  onLoad (params, data) {
+     //这里param1传递过来之后变成了字符串"[object Object]", 实际上应该是一个Object 这是底层框架的BUG
+      console.log(data.params.param1); //"[object Object]"
+  }
+```
+2、通过$preload传递Object
+```
+  // page1.js
+  this.$preload('param1', {});
+  this.$redirect('./page2');
+
+  // page2.js
+  onLoad (params, data) {
+      console.log(data.preload.param1); // 可以正确拿到对象
+  }
+```
 
 [1]:https://tencent.github.io/wepy/

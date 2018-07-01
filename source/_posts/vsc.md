@@ -1,7 +1,7 @@
 ---
 title: 在VSCode中创建自己的代码片段
 date: 2018-06-08 10:57:43
-tags: [技术之路, IDE]
+tags: [技术之路, IDE, VSCode]
 ---
 ### 在[VSCode][1]创建自己的代码片段
 

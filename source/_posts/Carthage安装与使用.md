@@ -28,7 +28,7 @@ github "realm/realm-cocoa"
 ```
 3、安装依赖
 ```
-$ carthage update --platform iOS
+$ carthage update --platform iOS 
 ```
 [1]:https://github.com/Carthage/Carthage
 [2]:https://github.com/Carthage/Carthage/releases
